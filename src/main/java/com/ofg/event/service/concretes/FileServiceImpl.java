@@ -92,8 +92,7 @@ public class FileServiceImpl implements FileService {
     private Path getImagePath(String imageType, String filename) {
         String folder = switch (imageType) {
             case "profile" -> appProperties.getStorage().getProfile();
-            case "event/main-image" -> appProperties.getStorage().getEvent() + "/main-image";
-            case "event/side-images" -> appProperties.getStorage().getEvent() + "/side-images";
+            case "event" -> appProperties.getStorage().getEvent();
             default -> throw new IllegalArgumentException("Unknown image type: " + imageType);
         };
         return Paths.get(appProperties.getStorage().getRoot(), folder, filename);

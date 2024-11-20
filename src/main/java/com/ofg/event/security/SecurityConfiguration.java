@@ -31,6 +31,13 @@ public class SecurityConfiguration {
         http
                 .authorizeHttpRequests((authentication) ->
                         authentication
+                                .requestMatchers(HttpMethod.GET, "/categories").hasAuthority("ROLE_ADMIN")
+                                .requestMatchers(HttpMethod.GET, "/categories/{categoryId}").hasAuthority("ROLE_ADMIN")
+                                .requestMatchers(HttpMethod.GET, "/categories/name/{name}").hasAuthority("ROLE_ADMIN")
+                                .requestMatchers(HttpMethod.POST, "/categories").hasAuthority("ROLE_ADMIN")
+                                .requestMatchers(HttpMethod.PUT, "/categories/{categoryId}").hasAuthority("ROLE_ADMIN")
+                                .requestMatchers(HttpMethod.DELETE, "/categories/{categoryId}").hasAuthority("ROLE_ADMIN")
+
                                 .requestMatchers(HttpMethod.GET, "/roles").hasAuthority("ROLE_ADMIN")
                                 .requestMatchers(HttpMethod.GET, "/roles/{roleId}").hasAuthority("ROLE_ADMIN")
                                 .requestMatchers(HttpMethod.POST, "/roles").hasAuthority("ROLE_ADMIN")
