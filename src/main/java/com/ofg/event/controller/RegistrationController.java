@@ -7,6 +7,7 @@ import com.ofg.event.model.request.RegistrationCreateRequest;
 import com.ofg.event.model.response.RegistrationResponse;
 import com.ofg.event.security.CurrentUser;
 import com.ofg.event.service.abstracts.RegistrationService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -46,7 +47,7 @@ public class RegistrationController {
 
     @PostMapping
     public ResponseEntity<ApiDataResponse<RegistrationResponse>> createRegistration(@AuthenticationPrincipal CurrentUser currentUser,
-                                                                                    @RequestBody RegistrationCreateRequest registrationCreateRequest) {
+                                                                                    @Valid @RequestBody RegistrationCreateRequest registrationCreateRequest) {
         RegistrationResponse registration = registrationService.registerUserForEvent(currentUser.getId(), registrationCreateRequest);
         return ResponseUtil.createApiDataResponse(registration, REGISTRATION_CREATE_SUCCESS, HttpStatus.OK);
     }
