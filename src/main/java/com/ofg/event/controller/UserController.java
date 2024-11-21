@@ -37,11 +37,6 @@ public class UserController {
         this.userService = userService;
     }
 
-    @GetMapping("/test")
-    public String adminTestRoute() {
-        return "Access granted: You have ADMIN privileges!";
-    }
-
     @GetMapping
     public ResponseEntity<ApiDataResponse<Page<UsersListResponse>>> getAllUsers(Pageable pageable) {
         Page<UsersListResponse> users = userService.getAllUsers(pageable);

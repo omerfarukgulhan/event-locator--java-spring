@@ -31,9 +31,20 @@ public class SecurityConfiguration {
         http
                 .authorizeHttpRequests((authentication) ->
                         authentication
-                                .requestMatchers(HttpMethod.GET, "/categories").hasAuthority("ROLE_ADMIN")
-                                .requestMatchers(HttpMethod.GET, "/categories/{categoryId}").hasAuthority("ROLE_ADMIN")
-                                .requestMatchers(HttpMethod.GET, "/categories/name/{name}").hasAuthority("ROLE_ADMIN")
+                                .requestMatchers(HttpMethod.GET, "/registrations/future").hasAuthority("ROLE_USER")
+                                .requestMatchers(HttpMethod.GET, "/registrations/past").hasAuthority("ROLE_USER")
+                                .requestMatchers(HttpMethod.POST, "/registrations").hasAuthority("ROLE_USER")
+                                .requestMatchers(HttpMethod.DELETE, "/registrations/{eventId}").hasAuthority("ROLE_USER")
+
+                                .requestMatchers(HttpMethod.GET, "/events").permitAll()
+                                .requestMatchers(HttpMethod.GET, "/events/{eventId}").permitAll()
+                                .requestMatchers(HttpMethod.POST, "/events").hasAuthority("ROLE_ADMIN")
+                                .requestMatchers(HttpMethod.PUT, "/events/{eventId}").hasAuthority("ROLE_ADMIN")
+                                .requestMatchers(HttpMethod.DELETE, "/events/{eventId}").hasAuthority("ROLE_ADMIN")
+
+                                .requestMatchers(HttpMethod.GET, "/categories").permitAll()
+                                .requestMatchers(HttpMethod.GET, "/categories/{categoryId}").permitAll()
+                                .requestMatchers(HttpMethod.GET, "/categories/name/{name}").permitAll()
                                 .requestMatchers(HttpMethod.POST, "/categories").hasAuthority("ROLE_ADMIN")
                                 .requestMatchers(HttpMethod.PUT, "/categories/{categoryId}").hasAuthority("ROLE_ADMIN")
                                 .requestMatchers(HttpMethod.DELETE, "/categories/{categoryId}").hasAuthority("ROLE_ADMIN")
