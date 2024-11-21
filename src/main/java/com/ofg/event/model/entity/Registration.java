@@ -7,7 +7,6 @@ import lombok.Data;
 @Table(name = "registrations", uniqueConstraints = {@UniqueConstraint(columnNames = {"user_id", "event_id"})})
 @Data
 public class Registration {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -19,7 +18,4 @@ public class Registration {
     @ManyToOne
     @JoinColumn(name = "event_id", nullable = false)
     private Event event;
-
-    @Column(nullable = false)
-    private boolean attended;
 }
