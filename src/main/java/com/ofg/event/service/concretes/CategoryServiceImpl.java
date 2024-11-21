@@ -28,9 +28,15 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public CategoryResponse getCategoryById(long categoryId) {
+    public CategoryResponse getCategoryResponseById(long categoryId) {
         return categoryRepository.findById(categoryId)
                 .map(CategoryResponse::new)
+                .orElseThrow(() -> new NotFoundException(categoryId));
+    }
+
+    @Override
+    public Category getCategoryEntityById(long categoryId) {
+        return categoryRepository.findById(categoryId)
                 .orElseThrow(() -> new NotFoundException(categoryId));
     }
 
