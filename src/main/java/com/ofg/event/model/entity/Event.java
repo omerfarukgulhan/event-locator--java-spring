@@ -14,10 +14,6 @@ public class Event {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
-    @JoinColumn(name = "created_by", nullable = false)
-    private User user;
-
     @Column(nullable = false, unique = true)
     private String name;
 
@@ -26,6 +22,12 @@ public class Event {
 
     @Column(nullable = false)
     private String location;
+
+    @Column(nullable = false)
+    private double latitude;
+
+    @Column(nullable = false)
+    private double longitude;
 
     @Column(name = "event_image", nullable = false)
     private String eventImage = "default.png";
@@ -37,12 +39,15 @@ public class Event {
     private int maxCapacity;
 
     @Column(nullable = false)
+    private int currentRegistrations = 0;
+
+    @Column(nullable = false)
     private int numberOfReviews = 0;
 
     @Column(nullable = false)
     private double averageRating = 0.0;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "category_id", nullable = false)
     private Category category;
 
