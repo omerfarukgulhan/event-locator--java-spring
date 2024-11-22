@@ -73,6 +73,11 @@
             <optional>true</optional>
         </dependency>
         <dependency>
+            <groupId>com.google.firebase</groupId>
+            <artifactId>firebase-admin</artifactId>
+            <version>9.1.1</version> <!-- Latest version -->
+        </dependency>
+        <dependency>
             <groupId>com.twilio.sdk</groupId>
             <artifactId>twilio</artifactId>
             <version>8.31.0</version>
