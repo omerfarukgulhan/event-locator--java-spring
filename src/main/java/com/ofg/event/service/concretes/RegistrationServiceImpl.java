@@ -1,7 +1,7 @@
 package com.ofg.event.service.concretes;
 
+import com.ofg.event.exception.general.DuplicateOperationException;
 import com.ofg.event.exception.general.NotFoundException;
-import com.ofg.event.exception.other.DuplicateRegistrationException;
 import com.ofg.event.model.entity.Event;
 import com.ofg.event.model.entity.Registration;
 import com.ofg.event.model.entity.User;
@@ -60,7 +60,7 @@ public class RegistrationServiceImpl implements RegistrationService {
             eventService.increaseEventsCurrentRegistrations(registrationCreateRequest.eventId());
             return new RegistrationResponse(savedRegistration);
         } catch (DataIntegrityViolationException ex) {
-            throw new DuplicateRegistrationException(userId, registrationCreateRequest.eventId());
+            throw new DuplicateOperationException("User", "registration", userId, registrationCreateRequest.eventId());
         }
     }
 

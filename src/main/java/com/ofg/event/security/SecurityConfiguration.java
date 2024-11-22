@@ -31,6 +31,15 @@ public class SecurityConfiguration {
         http
                 .authorizeHttpRequests((authentication) ->
                         authentication
+                                .requestMatchers(HttpMethod.GET, "/favorites").hasAuthority("ROLE_USER")
+                                .requestMatchers(HttpMethod.POST, "/favorites/").hasAuthority("ROLE_USER")
+                                .requestMatchers(HttpMethod.DELETE, "/favorites/{eventId}").hasAuthority("ROLE_USER")
+
+                                .requestMatchers(HttpMethod.GET, "/reviews/{eventId}").permitAll()
+                                .requestMatchers(HttpMethod.POST, "/reviews").hasAuthority("ROLE_USER")
+                                .requestMatchers(HttpMethod.PUT, "/reviews/{reviewId}").hasAuthority("ROLE_USER")
+                                .requestMatchers(HttpMethod.DELETE, "/reviews/{reviewId}").hasAuthority("ROLE_USER")
+
                                 .requestMatchers(HttpMethod.GET, "/registrations/future").hasAuthority("ROLE_USER")
                                 .requestMatchers(HttpMethod.GET, "/registrations/past").hasAuthority("ROLE_USER")
                                 .requestMatchers(HttpMethod.POST, "/registrations").hasAuthority("ROLE_USER")
