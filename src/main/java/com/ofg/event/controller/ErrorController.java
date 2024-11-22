@@ -8,9 +8,9 @@ import com.ofg.event.exception.authentication.*;
 import com.ofg.event.exception.email.ActivationNotificationException;
 import com.ofg.event.exception.email.EmailServiceException;
 import com.ofg.event.exception.file.FileServiceException;
+import com.ofg.event.exception.general.DuplicateOperationException;
 import com.ofg.event.exception.general.NotFoundException;
 import com.ofg.event.exception.general.NotUniqueEmailException;
-import com.ofg.event.exception.other.DuplicateRegistrationException;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.http.ResponseEntity;
@@ -24,7 +24,7 @@ public class ErrorController {
     @ExceptionHandler({
             ActivationNotificationException.class,
             AuthenticationException.class,
-            DuplicateRegistrationException.class,
+            DuplicateOperationException.class,
             EmailServiceException.class,
             FileServiceException.class,
             InvalidPasswordException.class,
@@ -46,7 +46,7 @@ public class ErrorController {
             status = 502;
         } else if (exception instanceof AuthenticationException || exception instanceof UnauthorizedException) {
             status = 401;
-        } else if (exception instanceof DuplicateRegistrationException) {
+        } else if (exception instanceof DuplicateOperationException) {
             status = 409;
         } else if (exception instanceof EmailServiceException) {
             status = 500;
