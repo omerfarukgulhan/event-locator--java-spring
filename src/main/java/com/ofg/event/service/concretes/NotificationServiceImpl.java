@@ -5,13 +5,21 @@ import com.google.firebase.messaging.Message;
 import com.ofg.event.config.FirebaseInitializer;
 import com.ofg.event.service.abstracts.NotificationService;
 import jakarta.annotation.PostConstruct;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class NotificationServiceImpl implements NotificationService {
+    private final FirebaseInitializer firebaseInitializer;
+
+    @Autowired
+    public NotificationServiceImpl(FirebaseInitializer firebaseInitializer) {
+        this.firebaseInitializer = firebaseInitializer;
+    }
+
     @PostConstruct
     public void initFirebase() {
-        FirebaseInitializer.initializeFirebase();
+//        firebaseInitializer.initializeFirebase();
     }
 
     @Override
