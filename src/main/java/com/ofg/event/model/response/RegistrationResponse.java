@@ -4,11 +4,11 @@ import com.ofg.event.model.entity.Registration;
 
 public record RegistrationResponse(
         Long id,
-        UserResponse userResponse,
+        Long userId,
         EventResponse eventResponse
 ) {
     public RegistrationResponse(Registration registration) {
-        this(registration.getId(), new UserResponse(registration.getUser()),
+        this(registration.getId(), registration.getUser().getId(),
                 new EventResponse(registration.getEvent()));
     }
 }
