@@ -88,9 +88,14 @@ public class ReviewServiceImpl implements ReviewService {
     }
 
     private void updateReviewDetails(Review review, ReviewUpdateRequest reviewUpdateRequest) {
-        review.setRating(reviewUpdateRequest.rating());
-        review.setComment(reviewUpdateRequest.comment());
-        review.setCreatedAt(LocalDateTime.now());
+        if (reviewUpdateRequest.comment() != null) {
+            review.setRating(reviewUpdateRequest.rating());
+            review.setComment(reviewUpdateRequest.comment());
+            review.setCreatedAt(LocalDateTime.now());
+        } else {
+            review.setRating(reviewUpdateRequest.rating());
+            review.setCreatedAt(LocalDateTime.now());
+        }
     }
 
     private void updateEventRatingAndReviewCount(Event event) {

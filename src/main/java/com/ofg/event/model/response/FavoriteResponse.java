@@ -4,11 +4,11 @@ import com.ofg.event.model.entity.Favorite;
 
 public record FavoriteResponse(
         Long id,
-        UserResponse userResponse,
+        Long userId,
         EventResponse eventResponse
 ) {
     public FavoriteResponse(Favorite favorite) {
-        this(favorite.getId(), new UserResponse(favorite.getUser()),
+        this(favorite.getId(), favorite.getUser().getId(),
                 new EventResponse(favorite.getEvent()));
     }
 }
