@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Optional;
 
 public interface RegistrationRepository extends JpaRepository<Registration, Long> {
@@ -17,4 +18,6 @@ public interface RegistrationRepository extends JpaRepository<Registration, Long
 
     @Query("SELECT r FROM Registration r WHERE r.user.id = :userId AND r.event.dateTime < :now")
     Page<Registration> findByUserIdAndEventDateBefore(Long userId, LocalDateTime now, Pageable pageable);
+
+    List<Registration> findByEventId(Long eventId);
 }

@@ -15,6 +15,9 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+import java.util.List;
+
 @Service
 public class EventServiceImpl implements EventService {
     private final EventRepository eventRepository;
@@ -58,6 +61,14 @@ public class EventServiceImpl implements EventService {
     public Event getEventEntityById(long eventId) {
         return eventRepository.findById(eventId)
                 .orElseThrow(() -> new NotFoundException(eventId));
+    }
+
+    @Override
+    public List<Event> getUpcomingEventsWithinMinutes(int minutes) {
+        LocalDateTime now = LocalDateTime.now();
+        LocalDateTime startWindow = now.plusMinutes(minutes - 5);
+        LocalDateTime endWindow = now.plusMinutes(minutes + 5);
+        return eventRepository.findEventsWithinNotificationWindow(startWindow, endWindow);
     }
 
     @Override

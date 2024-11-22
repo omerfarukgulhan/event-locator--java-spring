@@ -18,6 +18,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Service
 public class RegistrationServiceImpl implements RegistrationService {
@@ -44,6 +45,11 @@ public class RegistrationServiceImpl implements RegistrationService {
     public Page<RegistrationResponse> getPastRegistrations(long userId, Pageable pageable) {
         return registrationRepository.findByUserIdAndEventDateBefore(userId, LocalDateTime.now(), pageable)
                 .map(RegistrationResponse::new);
+    }
+
+    @Override
+    public List<Registration> getRegistrationsForEvent(long eventId) {
+        return registrationRepository.findByEventId(eventId);
     }
 
     @Override
@@ -74,4 +80,3 @@ public class RegistrationServiceImpl implements RegistrationService {
         registrationRepository.delete(registration);
     }
 }
-
